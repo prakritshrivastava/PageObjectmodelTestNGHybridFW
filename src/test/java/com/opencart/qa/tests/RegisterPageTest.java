@@ -27,17 +27,33 @@ public class RegisterPageTest extends BaseTest {
 		};
 	}
 	
+	/**
+	 * Data provider for excel
+	 * @return
+	 */
 	@DataProvider
 	public Object[][] getUserRegDataFromExcel(){
 		return ExcelUtil.outputExcel(AppConstants.TestDataSheetName);
 	}
 	
+	/**
+	 * Data provider for csv
+	 * @return
+	 */
 	
 	@DataProvider
 	public Object[][] getUserRegDataFromCSV(){
 		return CSVUtil.getDataFromCSV(AppConstants.TestDataCSVName);
 	}
 	
+	/**
+	 * Execute the registration.
+	 * @param firstName
+	 * @param lastName
+	 * @param telephone
+	 * @param password
+	 * @param subscribe
+	 */
 	@Test(dataProvider="getUserRegDataFromCSV")
 	public void userRegisterPage(String firstName,String lastName,String telephone,String password,String subscribe) {
 		Assert.assertTrue(registerPage.userRegistration(firstName,lastName,telephone,password,subscribe));
