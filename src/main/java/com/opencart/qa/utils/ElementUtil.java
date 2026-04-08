@@ -281,9 +281,7 @@ public class ElementUtil {
                 .pollingEvery(Duration.ofSeconds(PollingTime))
                 .ignoring(NoSuchElementException.class)
                 .withMessage("No element found !!!");
-
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-
     }
 
     public WebElement waitForElementWithFluentWaitWithoutBy(WebElement element,long timeout,long pollingTime){
@@ -299,6 +297,24 @@ public class ElementUtil {
     
     public String doElementGetText(By locator) {
     	return getElement(locator).getText();
+    }
+    
+    public List<String> fetchElementsText(By locator){
+    	List<String> eleTextList = new ArrayList<String>();
+    	getElements(locator)
+    			.stream()
+    				.filter( e -> !e.getText().isEmpty())
+    					.forEach(e -> eleTextList.add(e.getText()));
+    	return eleTextList;
+    }
+    
+    public void printElementsText(By locator){
+    	List<String> eleTextList = new ArrayList<String>();
+    	getElements(locator)
+    			.stream()
+    				.filter( e -> !e.getText().isEmpty())
+    					.forEach(e -> eleTextList.add(e.getText()));
+ 
     }
 	
 }
